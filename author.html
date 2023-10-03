@@ -32,6 +32,11 @@
 
 <p id = "result"></p>
 
+
+<div class = "container">
+    <img id = "cityimg" src = "Charlotte.jpg" width = "100" height="100" onclick = "selectImage()">
+</div>
+
 <script> 
 
 function resolveForm (){
@@ -67,6 +72,27 @@ function resolveForm (){
         }
         out = document.getElementById("result")
         out.innerHTML = "Correct Guesses - " +good+" Incorrect Guesses - " +oops
+    }
+</script>
+
+<script>
+    var useImage = 1;
+    function selectImage(){
+        switch(useImage){
+            case 1:
+            document.getElementById('cityimg') .src = "Houston.jpg";
+                useImage = 2;
+                break;
+
+            case 2:
+            document.getElementById('cityimg') .src = "Saint-Louis.jpg"
+                useImage = 3;
+                break;
+
+            case 3:
+            document.getElementById('cityimg') .src = "Charlotte.jpg"
+                useImage = 1;
+        }
     }
 </script>
 
