@@ -1,70 +1,104 @@
 <!DOCTYPE html>
 <html>
- <head>
+
+<head>
     <title>Tip Amounts</title>
- </head>
+</head>
+
 <body>
 
-<h2>Jake Schellhorn shows tip amounts</h2>
+    <h2>Jake Schellhorn shows tip amounts</h2>
 
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
+    <form>
+        <label for="form1_age">What is your age </label>
+        <input type="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
 
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
+        <label for="form1_nick">What is your nickname </label>
+        <input type="text" id="form1_nick" name="form1_nick" autofocus> <br>
 
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
+        <input type="button" onclick="resolveForm()" value="Get values from form">
+    </form>
 
 
-<p id="result">This text will be replaced</p>
+    <p id="result">This text will be replaced</p>
 
-<form>
-    <label for = "base">Enter base amount </label>
-    <input type = "number" id = "base" value = 50>
+    <form>
+        <label for="base">Enter base amount </label>
+        <input type="number" id="base" value=50>
 
-    <label for = "tip">Enter the tip percent </label>
-    <input type = "number" id = "tip" value = 15>
+        <label for="tip">Enter the tip percent </label>
+        <input type="number" id="tip" value=15>
 
-    <input type="button" onclick="tips()" value="Show tip">
-</form>
+        <input type="button" onclick="tips()" value="Show tip">
+    </form>
 
-<div id = "tipamounts">replace</div>
+    <div id="tipamounts"></div>
 
-<script> 
 
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
-    
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-</script>
+    <form>
+        <input type="radio" id="sum" onclick="chooseOp()" value="sum">
+        <label for="sum">sum</label>
 
-<script>
-    var myOutput = "";
+        <input type="radio" onclick="chooseOp()" value="difference">
+        <label for="sum">diff</label>
 
-    function tips(){
-        base = document.getElementById("base").value
-        percent = document.getElementById("tip").value/100
-        var myOutput = "";
-        for(let x=0; x<5; x++){
-            result = (base*(percent+.04*x))
-            myOutput+=((percent+.04*x)*100)+"% is "+Math.round(result*10)/10 +"; "
+        <input type="radio" id="product" onclick="chooseOp()" value="product">
+        <label for="product">mult</label>
+    </form>
+    <p id="results">replace</p>
+
+    <script>
+
+        function resolveForm() {
+            console.log("Getting form values")
+            age = document.getElementById("form1_age").value
+            nick = document.getElementById("form1_nick").value
+            confirmed = confirm("Are these the values? " + age + " and " + nick)
+
+            out = document.getElementById("result")
+            if (confirmed) {
+                out.innerHTML = "Values were confirmed"
+            } else {
+                out.innerHTML = "Values were not confirmed"
+            }
         }
-        out = document.getElementById("tipamounts")
-        out.innerHTML = "Tips are: " + myOutput
+    </script>
 
-    }
-</script>
+    <script>
+        var myOutput = "";
 
+        function tips() {
+            base = document.getElementById("base").value
+            percent = document.getElementById("tip").value / 100
+            var myOutput = "";
+            for (let x = 0; x < 5; x++) {
+                result = (base * (percent + .04 * x))
+                myOutput += ((percent + .04 * x) * 100) + "% is " + Math.round(result * 10) / 10 + "; "
+            }
+            out = document.getElementById("tipamounts")
+            out.innerHTML = "Tips are: " + myOutput
+
+        }
+    </script>
+
+    <script>
+        var operation = 0;
+        function chooseOp(){
+            base = parseInt(document.getElementById("base").value)
+            percent = parseInt(document.getElementById("tip").value)
+            if(document.getElementById("sum").checked){
+                result = base + percent
+            }
+            else if(document.getElementById("diff").checked){
+                result = base-percent
+            }
+            else{
+                result = base*percent
+            }
+            out = document.getElementById("results")
+            out.innerHTML = result
+        }
+    </script>
 </body>
-</html> 
+
+</html>
